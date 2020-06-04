@@ -17,12 +17,18 @@
     </fragment>
     <fragment
         android:id="@+id/NoteDetailFragment"
-        android:name="com.apipas.mynote.NoteDetailFragment"
+        android:name="com.apipas.mynote.ui.notedetail.NoteDetailFragment"
         android:label="@string/note_detail_fragment_label"
         tools:layout="@layout/fragment_note_detail">
 
+        <argument
+            android:name="content"
+            app:argType="string" />
         <action
             android:id="@+id/action_NoteDetailFragment_to_NoteListFragment"
-            app:destination="@id/NoteListFragment" />
+            app:destination="@id/NoteListFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/NoteListFragment" />
+
     </fragment>
 </navigation>

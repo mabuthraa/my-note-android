@@ -4,14 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import com.apipas.mynote.event.NavToDirection
-import com.apipas.mynote.util.Log
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_note_list.*
 import kotlin.reflect.KClass
 
 
@@ -20,12 +15,6 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>(
     viewModelClass: KClass<VM>
 ) :
     MvvmFragment<B, VM>(layoutId, viewModelClass) {
-
-    companion object {
-        const val DIALOG_ERROR = -1
-    }
-
-//    val activityViewModel: MainVM by sharedViewModel(MainVM::class)// todo be added
 
     private var rootLayout: View? = null
 
@@ -38,14 +27,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>(
     ): View? {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         rootLayout = view?.let { it.rootView }
-        subscribers()
         return view
-    }
-
-    private fun subscribers() {
-        subscribe(NavToDirection::class, Observer {
-            findNavController().navigate(it.navDirections)
-        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,20 +45,5 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>(
                 }
             }
         })
-    }
-
-
-    open fun initProgress() {
-        // show the loading when [MainViewModel.loading] is true
-        viewModel.loading.observe(viewLifecycleOwner, Observer { value ->
-            value?.let { show ->
-                Log.d("show $value ")
-            }
-        })
-
-    }
-
-    open fun showProgress(show: Boolean) {
-        // to be override in sub-fragment to show/hide loading
     }
 }

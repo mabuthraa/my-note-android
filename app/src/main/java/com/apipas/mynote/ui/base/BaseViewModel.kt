@@ -1,7 +1,6 @@
 package com.apipas.mynote.ui.base
 
 
-import android.util.TypedValue
 import androidx.lifecycle.*
 import com.apipas.mynote.App
 import com.apipas.mynote.BuildConfig

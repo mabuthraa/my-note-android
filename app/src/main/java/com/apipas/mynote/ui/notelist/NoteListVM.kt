@@ -20,4 +20,8 @@ class NoteListVM : BaseViewModel() {
 //            throw Exception("test")
         }
     }
+
+    fun goToNoteDetail(content: String) {
+        publish(NavToNoteDetail(content))
+    }
 }

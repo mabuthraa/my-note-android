@@ -41,8 +41,8 @@ abstract class MvvmFragment<B : ViewDataBinding, VM : BaseViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-//        binding.setVariable(BR.lifecycle, viewLifecycleOwner)
+        binding.lifecycleOwner = this
+//        binding.setVariable(BR.lifecycle, viewLifecycleOwner) //todo to be added
 
         binding.setVariable(BR.vm, viewModel)
         return binding.root
@@ -54,6 +54,6 @@ abstract class MvvmFragment<B : ViewDataBinding, VM : BaseViewModel>(
     }
 
     protected fun <T : LiveEvent> subscribe(eventClass: KClass<T>, eventObserver: Observer<T>) {
-        viewModel.subscribe(viewLifecycleOwner, eventClass, eventObserver)
+        viewModel.subscribe(this, eventClass, eventObserver)
     }
 }
