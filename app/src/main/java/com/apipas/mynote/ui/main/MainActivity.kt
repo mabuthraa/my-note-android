@@ -1,19 +1,20 @@
-package com.apipas.mynote
+package com.apipas.mynote.ui.main
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.Navigation
+import com.apipas.mynote.R
+import com.apipas.mynote.databinding.ActivityMainBinding
+import com.apipas.mynote.ui.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity :
+    BaseActivity<ActivityMainBinding, MainVM>(R.layout.activity_main, MainVM::class) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         setupListeners()
     }
@@ -25,11 +26,6 @@ class MainActivity : AppCompatActivity() {
         // setting title according to fragment
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             findViewById<Toolbar>(R.id.toolbar).title = navController.currentDestination?.label
-        }
-
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
         }
     }
 

@@ -16,8 +16,7 @@
         android:background="#ff000000"
         android:elevation="2dp"
         android:gravity="center"
-        android:orientation="vertical"
-        app:visibleOrGone="@{vm.loading}">
+        android:orientation="vertical">
 
         <ProgressBar
             android:layout_width="48dp"
