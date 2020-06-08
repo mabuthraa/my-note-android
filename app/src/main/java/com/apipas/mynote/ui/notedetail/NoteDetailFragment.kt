@@ -18,7 +18,7 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVm>
 
     override fun initVM() {
         super.initVM()
-        viewModel.loadView(args.content)
+        viewModel.loadView(args.note)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

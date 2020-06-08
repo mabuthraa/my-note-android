@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
+import com.apipas.mynote.ui.main.MainVM
 import com.google.android.material.snackbar.Snackbar
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import kotlin.reflect.KClass
 
 
@@ -15,6 +17,8 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>(
     viewModelClass: KClass<VM>
 ) :
     MvvmFragment<B, VM>(layoutId, viewModelClass) {
+
+    private val activityViewModel: MainVM by sharedViewModel(MainVM::class)
 
     private var rootLayout: View? = null
 
