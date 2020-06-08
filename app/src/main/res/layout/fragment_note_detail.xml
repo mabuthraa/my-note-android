@@ -16,14 +16,25 @@
         tools:context=".ui.notedetail.NoteDetailFragment">
 
         <TextView
-            android:id="@+id/textview_second"
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.title}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="title" />
+
+        <TextView
+            android:id="@+id/textViewContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{vm.content}"
-            app:layout_constraintBottom_toTopOf="@id/button_second"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            tools:text="content" />
 
         <Button
             android:id="@+id/button_second"
@@ -31,10 +42,10 @@
             android:layout_height="wrap_content"
             android:onClick="@{()-> vm.goToList()}"
             android:text="@string/previous"
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_second" />
+            app:layout_constraintTop_toBottomOf="@id/textViewContent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

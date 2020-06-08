@@ -21,14 +21,14 @@
         android:label="@string/note_detail_fragment_label"
         tools:layout="@layout/fragment_note_detail">
 
-        <argument
-            android:name="content"
-            app:argType="string" />
         <action
             android:id="@+id/action_NoteDetailFragment_to_NoteListFragment"
             app:destination="@id/NoteListFragment"
             app:popUpToInclusive="true"
             app:popUpTo="@id/NoteListFragment" />
+        <argument
+            android:name="note"
+            app:argType="com.apipas.mynote.data.model.Note" />
 
     </fragment>
 </navigation>
