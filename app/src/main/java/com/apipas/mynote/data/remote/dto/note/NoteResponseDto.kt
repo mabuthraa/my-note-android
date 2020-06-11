@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class NoteResponseDto(
     @Json(name = "id")
-    val id: String,
+    val id: String = "",
     @Json(name = "title")
     val title: String = ""
 )

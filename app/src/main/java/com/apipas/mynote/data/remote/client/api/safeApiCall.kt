@@ -1,11 +1,11 @@
 package com.apipas.mynote.data.remote.client.api
 
+import android.content.Context
 import androidx.annotation.StringRes
 import com.apipas.mynote.App
 import com.apipas.mynote.R
 import com.apipas.mynote.exception.RepositoryErrorType
 import com.apipas.mynote.exception.RepositoryException
-import com.apipas.mynote.util.Log
 import com.apipas.mynote.util.NetworkUtil
 import retrofit2.HttpException
 import retrofit2.Response
@@ -19,16 +19,8 @@ suspend fun <T : Any, D : Any> safeApiCall(
 ): ApiResult<D> {
     lateinit var res: Response<T>
     try {
-        if (!NetworkUtil.verifyAvailableNetwork(App.instance)) {
-            return ApiResult.Error(
-                RepositoryException(
-                    RepositoryErrorType.TYPE_NETWORK,
-                    message = App.instance.getString(R.string.global_no_network_connection)
-                )
-            )
-        }
+
         res = call.invoke()
-        Log.d("res:$res")
         return if (res.body() == null) {
             ApiResult.Success(Unit as D, res)
         } else if (res.isSuccessful) {
@@ -38,7 +30,6 @@ suspend fun <T : Any, D : Any> safeApiCall(
         }
 
     } catch (e: Exception) {
-        Log.e("resError:${e.message}")
         return ApiResult.Error(
             when (e) {
                 is RepositoryException -> e

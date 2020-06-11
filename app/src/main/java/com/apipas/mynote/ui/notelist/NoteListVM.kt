@@ -28,31 +28,6 @@ class NoteListVM(private val noteRepository: NoteRepository) : BaseViewModel() {
             }
             val formattedDate = DateTimeFormat.formatTimeDate(Date())
             lastUpdate.value = App.instance.getString(R.string.note_list_last_update, formattedDate)
-
-//            //load one note
-//            when (val res = noteRepository.getNote("1")) {
-//                is ApiResult.Success -> notes.add(res.apiData)
-//                is ApiResult.Error -> throw res.exception
-//            }
-
-            //create note
-//            when (val res = noteRepository.createNote( "33333")) {
-//                is ApiResult.Success -> notes.add(res.apiData)
-//                is ApiResult.Error -> throw res.exception
-//            }
-
-//            //update note
-//            when (val res = noteRepository.updateNote("1", "33333")) {
-//                is ApiResult.Success -> notes.add(res.apiData)
-//                is ApiResult.Error -> throw res.exception
-//            }
-
-            // deleteNote
-//            when (val res = noteRepository.deleteNote("1")) {
-//                is ApiResult.Success -> {}
-//                is ApiResult.Error -> throw res.exception
-//            }
-
         }
     }
 

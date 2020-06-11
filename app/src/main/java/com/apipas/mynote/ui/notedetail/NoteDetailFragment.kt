@@ -1,17 +1,22 @@
 package com.apipas.mynote.ui.notedetail
 
+import android.content.Context
+import android.inputmethodservice.InputMethodService
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.apipas.mynote.R
 import com.apipas.mynote.databinding.FragmentNoteDetailBinding
 import com.apipas.mynote.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_note_detail.*
 
 
 class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVm>(
@@ -72,6 +77,14 @@ class NoteDetailFragment : BaseFragment<FragmentNoteDetailBinding, NoteDetailVm>
 
         subscribe(EditMenuEvent::class, Observer<EditMenuEvent> {
             this.menu?.findItem(R.id.action_discard)?.isVisible = it.showEditMenu
+            if (it.showEditMenu) {
+                note_et.requestFocus()
+                val inputMethodManager =
+                    context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.showSoftInput(note_et, InputMethodManager.SHOW_IMPLICIT)
+
+
+            }
         })
     }
 
