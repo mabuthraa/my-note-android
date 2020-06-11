@@ -7,7 +7,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel { NoteListVM() }
-    viewModel { NoteDetailVm() }
+    viewModel { NoteListVM(get()) }
+    viewModel { NoteDetailVm(get()) }
     viewModel { MainVM() }
 }

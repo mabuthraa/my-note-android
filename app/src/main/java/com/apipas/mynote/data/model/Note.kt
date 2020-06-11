@@ -3,16 +3,16 @@ package com.apipas.mynote.data.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Note(val title: String, val content: String) : Parcelable {
+data class Note(val id: String? = null, var title: String? = "") : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
-        parcel.readString()!!
+        parcel.readString(),
+        parcel.readString()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeString(title)
-        parcel.writeString(content)
     }
 
     override fun describeContents(): Int {

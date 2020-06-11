@@ -6,6 +6,7 @@ import com.apipas.mynote.App
 import com.apipas.mynote.BuildConfig
 import com.apipas.mynote.event.common.LiveEvent
 import com.apipas.mynote.event.common.LiveEventMap
+import com.apipas.mynote.exception.RepositoryException
 import com.apipas.mynote.util.Log
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -58,20 +59,21 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
             try {
                 loading.value = true
                 block()
+            } catch (repositoryException: RepositoryException) { //can be override with custom Exception for better handling
+                onException(repositoryException)
             } catch (error: Exception) { //can be override with custom Exception for better handling
-                onException(error)
-
+                onException(RepositoryException(cause = error))
             } finally {
                 loading.value = false
             }
         }
     }
 
-    private fun handleError(error: Exception) {
+    private fun handleError(error: RepositoryException) {
         onException(error)
     }
 
-    protected open fun onException(error: Exception) {
+    protected open fun onException(error: RepositoryException) {
 
         Log.d(":Error:${error.message}") // be aware sometimes there logs dont appear in console
         val unknownErrorMsg =

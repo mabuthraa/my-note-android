@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.apipas.mynote.R" />
+
         <variable
             name="vm"
             type="com.apipas.mynote.ui.notelist.NoteListVM" />
@@ -19,7 +21,9 @@
             android:id="@+id/textview_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{vm.dataTest}"
+            android:layout_margin="@dimen/margin_padding_size_8"
+            android:text="@{vm.lastUpdate}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,26 +32,27 @@
             android:id="@+id/note_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:items="@{vm.notes}"
+            app:layoutId="@{R.layout.item_note_view}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_first"
-            app:items="@{vm.notes}"
-            app:layoutId="@{R.layout.item_note_view}"
-            app:viewModel="@{vm}"
-            />
+            app:viewModel="@{vm}" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
+            android:layout_margin="@dimen/margin_padding_size_16"
             android:elevation="-1dp"
+            android:onClick='@{()-> vm.goToNoteDetail((String)null, true)}'
+            android:tint="@android:color/white"
             android:translationZ="-1dp"
             app:layout_anchor="@id/note_list"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_dialog_email"
+            app:srcCompat="@android:drawable/ic_input_add"
             app:visibleOrGone="@{!vm.loading}" />
 
         <include

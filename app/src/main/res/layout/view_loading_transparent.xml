@@ -13,14 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="#ff000000"
+        android:background="@color/gray_half_transparent"
         android:elevation="2dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <ProgressBar
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/margin_padding_size_48"
+            android:layout_height="@dimen/margin_padding_size_48"
             android:layout_gravity="center" />
 
     </LinearLayout>

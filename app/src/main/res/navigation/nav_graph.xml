@@ -24,11 +24,17 @@
         <action
             android:id="@+id/action_NoteDetailFragment_to_NoteListFragment"
             app:destination="@id/NoteListFragment"
-            app:popUpToInclusive="true"
-            app:popUpTo="@id/NoteListFragment" />
+            app:popUpTo="@id/NoteListFragment"
+            app:popUpToInclusive="true" />
         <argument
-            android:name="note"
-            app:argType="com.apipas.mynote.data.model.Note" />
+            android:name="noteId"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
+            android:name="editMode"
+            android:defaultValue="false"
+            app:argType="boolean" />
 
     </fragment>
 </navigation>
