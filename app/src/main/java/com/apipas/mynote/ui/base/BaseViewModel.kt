@@ -4,10 +4,14 @@ package com.apipas.mynote.ui.base
 import androidx.lifecycle.*
 import com.apipas.mynote.App
 import com.apipas.mynote.BuildConfig
+import com.apipas.mynote.R
+import com.apipas.mynote.data.remote.client.api.ApiResult
 import com.apipas.mynote.event.common.LiveEvent
 import com.apipas.mynote.event.common.LiveEventMap
+import com.apipas.mynote.exception.RepositoryErrorType
 import com.apipas.mynote.exception.RepositoryException
 import com.apipas.mynote.util.Log
+import com.apipas.mynote.util.NetworkUtil
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
@@ -54,10 +58,21 @@ abstract class BaseViewModel : ViewModel(), LifecycleObserver {
      *              lambda the loading loading will display, after completion or error the
      *              loading will stop
      */
-    open fun launchDataLoad(block: suspend () -> Unit): Job {
+    open fun launchDataLoad(checkInternet: Boolean = true, block: suspend () -> Unit): Job {
         return viewModelScope.launch {
             try {
+                //enable loading. Each UI has its own Loading widget
                 loading.value = true
+
+                //check internet
+                if (checkInternet && !NetworkUtil.verifyAvailableNetwork(App.instance)) {
+                    throw RepositoryException(
+                        RepositoryErrorType.TYPE_NETWORK,
+                        message = App.instance.getString(R.string.global_no_network_connection)
+                    )
+                }
+
+                //run block
                 block()
             } catch (repositoryException: RepositoryException) { //can be override with custom Exception for better handling
                 onException(repositoryException)
