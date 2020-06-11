@@ -23,7 +23,6 @@
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cvEmployee"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -47,6 +46,7 @@
 
 
                 <EditText
+                    android:id="@+id/note_et"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -60,7 +60,9 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:visibleOrGone="@{vm.editMode}"
                     tools:text="title"
-                    tools:visibility="gone" />
+                    tools:visibility="gone">
+                    <requestFocus />
+                </EditText>
 
 
             </androidx.cardview.widget.CardView>
