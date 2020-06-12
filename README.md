@@ -1,5 +1,5 @@
 # my-note
-MyNote app is sample of Android `app` which written in `Kotlin` and follow `MVVM` with DI `Koin`
+MyNote app is sample of Android `app` which written in `Kotlin` and follow `MVVM` with DI `Koin` and `kotlin-coroutines`
 
 ## Table of contents
 * [1. Dependencies:](#1.-Dependencies:)
