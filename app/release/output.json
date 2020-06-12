@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.apipas.mynote",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 1000001,
+      "versionName": "1000001",
+      "enabled": true,
+      "outputFile": "app-release.apk"
+    }
+  ]
+}

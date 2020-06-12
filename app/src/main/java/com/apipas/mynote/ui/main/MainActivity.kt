@@ -27,7 +27,7 @@ class MainActivity :
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         // setting title according to fragment
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener {     controller, destination, arguments ->
             toolbar.title = "" // prevent duplication
             toolbar_title.text = navController.currentDestination?.label
         }
