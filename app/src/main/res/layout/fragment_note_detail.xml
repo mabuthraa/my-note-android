@@ -1,27 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".NoteDetailFragment">
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="vm"
+            type="com.apipas.mynote.ui.notedetail.NoteDetailVm" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/sv_weight_tell_us"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".ui.notedetail.NoteDetailFragment">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_padding_size_16"
+                android:elevation="3dp"
+                app:visibleOrGone="@{!vm.loading}"
+                card_view:cardCornerRadius="1dp">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{()-> vm.toEditMode(true)}"
+                    android:padding="@dimen/margin_padding_size_8"
+                    android:text='@{vm.note.title ?? "" }'
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:visibleOrGone="@{!vm.editMode}"
+                    tools:text="title" />
+
+
+                <EditText
+                    android:id="@+id/note_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="top"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:maxLines="1000"
+                    android:minLines="10"
+                    android:padding="@dimen/margin_padding_size_8"
+                    android:text="@={vm.note.title }"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:visibleOrGone="@{vm.editMode}"
+                    tools:text="title"
+                    tools:visibility="gone">
+                    <requestFocus />
+                </EditText>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <include
+                android:id="@+id/layoutInProgress"
+                layout="@layout/view_loading_transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibleOrGone="@{vm.loading}"
+                tools:visibility="gone" />
+        </FrameLayout>
+    </ScrollView>
+
+</layout>
