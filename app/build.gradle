@@ -4,6 +4,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+
+final VERSION_MAJOR = 1
+final VERSION_MINOR = 0
+final VERSION_PATCH = 1
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -12,18 +17,43 @@ android {
         applicationId "com.apipas.mynote"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
+        versionCode Integer.parseInt(String.valueOf(VERSION_MAJOR) + String.valueOf(VERSION_MINOR).padLeft(3, "0") + String.valueOf(VERSION_PATCH).padLeft(3, "0"))
+        versionName "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+
+
+    signingConfigs {
+        Properties propsRelease = new Properties()
+        propsRelease.load(new FileInputStream(new File(projectDir.path + '/../extra/signing/signing.properties')))
         release {
+            storeFile file(propsRelease['keystore'])
+            storePassword propsRelease['keystore.password']
+            keyAlias propsRelease['keyAlias']
+            keyPassword propsRelease['keyPassword']
+        }
+        Properties propsDebug = new Properties()
+        propsDebug.load(new FileInputStream(new File(projectDir.path + '/../extra/signing/signing.properties')))
+        debug {
+            storeFile file(propsDebug['keystore'])
+            storePassword propsDebug['keystore.password']
+            keyAlias propsDebug['keyAlias']
+            keyPassword propsDebug['keyPassword']
+        }
+    }
+
+    buildTypes {
+        debug{
+            signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -48,7 +78,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
 
     // Navigation Components
     def nav_version = "2.3.0-beta01"
