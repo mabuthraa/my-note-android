@@ -2,13 +2,13 @@
 MyNote app is sample of Android `app` which written in `Kotlin` and follow `MVVM` with DI `Koin` and `kotlin-coroutines`
 
 ## Table of contents
-* [1. Dependencies:](#1.-Dependencies:)
+* [1. Dependencies](#1.-Dependencies)
 * [2. Minimum Android version](#2.-Minimum-Android-version)
 * [3. Permissions](#3.-Permissions)
 * [4. Build](#4.-Build)
 * [5. License](#5.-License)
 
-## 1. Dependencies:
+## 1. Dependencies
 - MVVM (Architecture)
 - Android architecture components (LiveData,LifeCycle, & viewModel)
 - android navigation components
